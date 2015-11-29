@@ -1,15 +1,15 @@
 import { isString, isFunction, isArray } from 'fighterr';
 
-function reduceGetter(getter, reducer) {
+function reduce(getter, reducer) {
   const reducerIsFunction = isFunction(reducer);
   const reducerIsArray = isArray(reducer);
 
   if (!reducerIsFunction && !reducerIsArray) {
-    throw new Error('reduceGetter: reducer needs to be a function or array!');
+    throw new Error('reduce: reducer needs to be a function or array!');
   }
 
   if (reducerIsArray && !isFunction(reducer[reducer.length - 1])) {
-    throw new Error('reduceGetter: when reducer is defined as array, last member needs to be reduce function');
+    throw new Error('reduce: when reducer is defined as array, last member needs to be reduce function');
   }
 
   if (reducerIsFunction) {
@@ -32,7 +32,7 @@ function transform(getterList) {
   let next = getterList.shift();
 
   while (next) {
-    wrapped = reduceGetter(wrapped, next);
+    wrapped = reduce(wrapped, next);
     next = getterList.shift();
   }
 
@@ -41,5 +41,5 @@ function transform(getterList) {
 
 module.exports = {
   transform: transform,
-  reduceGetter: reduceGetter,
+  reduce: reduce,
 };
