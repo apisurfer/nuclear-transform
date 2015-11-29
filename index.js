@@ -23,11 +23,13 @@ function reduce(getter, reducer, ctx) {
   }
 
   // otherwise reducer is defined through array
+  reducer[reducer.length - 1] = reducer[reducer.length - 1].bind(ctx);
+
   if (isString(getter[0])) {
-    return [[getter]].concat(reducer.bind(ctx));
+    return [[getter]].concat(reducer);
   }
 
-  return [getter].concat(reducer.bind(ctx));
+  return [getter].concat(reducer);
 }
 
 function transform(getterList) {
