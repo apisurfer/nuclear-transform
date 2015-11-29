@@ -1,8 +1,11 @@
-import { isString, isFunction, isArray } from 'fighterr';
+var fighterr =  require('fighterr');
+var isString = fighterr.isString;
+var isFunction = fighterr.isFunction
+var isArray = fighterr.isArray;
 
 function reduce(getter, reducer) {
-  const reducerIsFunction = isFunction(reducer);
-  const reducerIsArray = isArray(reducer);
+  var reducerIsFunction = isFunction(reducer);
+  var reducerIsArray = isArray(reducer);
 
   if (!reducerIsFunction && !reducerIsArray) {
     throw new Error('reduce: reducer needs to be a function or array!');
@@ -28,8 +31,8 @@ function reduce(getter, reducer) {
 }
 
 function transform(getterList) {
-  let wrapped = getterList.shift();
-  let next = getterList.shift();
+  var wrapped = getterList.shift();
+  var next = getterList.shift();
 
   while (next) {
     wrapped = reduce(wrapped, next);
