@@ -1,0 +1,27 @@
+{
+  "name": "nuclear-transform",
+  "version": "0.0.1",
+  "description": "Tiny library for \"on the go\" nuclearjs getter transformation/reduce",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/popc0rn/nuclear-transform.git"
+  },
+  "keywords": [
+    "transform",
+    "nuclearjs",
+    "getter"
+  ],
+  "author": "popc0rn - http://popc0rn.me",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/popc0rn/nuclear-transform/issues"
+  },
+  "homepage": "https://github.com/popc0rn/nuclear-transform#readme",
+  "dependencies": {
+    "fighterr": "github:popc0rn/fighterr"
+  }
+}
