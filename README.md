@@ -7,6 +7,8 @@ Library for "on the go" [Nuclearjs Getter](https://optimizely.github.io/nuclear-
 
 nuclear-transform composes Getters for you and allows you to transform the data in intermediate steps. This allows you to receive exactly the data you want from just one reactor.evaluate call. No more round trips.
 
+**Old version** with a slightly different approach on reducing values can be found [here](https://github.com/popc0rn/nuclear-transform/tree/0.0.4)
+
 ## Example
 
 ```javascript
