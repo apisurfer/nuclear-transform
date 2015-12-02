@@ -4,7 +4,7 @@
   "description": "Tiny library for \"on the go\" nuclearjs getter transformation/reduce",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/karma start --single-run"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,15 @@
     "url": "https://github.com/popc0rn/nuclear-transform/issues"
   },
   "homepage": "https://github.com/popc0rn/nuclear-transform#readme",
-  "dependencies": {
-    "fighterr": "github:popc0rn/fighterr"
+  "dependencies": {},
+  "devDependencies": {
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.15",
+    "karma-browserify": "^4.4.2",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "nuclear-js": "^1.2.1",
+    "phantomjs": "^1.9.19",
+    "phantomjs-polyfill": "0.0.1"
   }
 }

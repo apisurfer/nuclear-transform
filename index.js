@@ -31,3 +31,5 @@ function transform(list) {
 
   return wrapped;
 }
+
+module.exports = transform;
