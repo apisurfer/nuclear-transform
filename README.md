@@ -19,11 +19,7 @@ var organizationGetter = ['organizations', '3']; // get specific org
 var websitesGetter = ['websites'];
 var adminUsersGetter = [
   ['users'],
-  function getAdmins(users) {
-    return users.filter(function (user) {
-      return user.get('permission') === 'admin';
-    });
-  },
+  users => users.filter(u => u.get('permission') === 'admin'),
 ];
 
 var list = [
