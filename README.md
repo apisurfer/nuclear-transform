@@ -1,6 +1,8 @@
 nuclear-transform
 =================
 
+![Build status](https://travis-ci.org/popc0rn/pirates-log.svg?branch=develop)
+
 Library for "on the go" Nuclearjs Getter transforms. You can find info on Getters [here](https://optimizely.github.io/nuclear-js/docs/04-getters.html)
 
 ## Usage example
