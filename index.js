@@ -1,51 +1,49 @@
-var fighterr =  require('fighterr');
-var isString = fighterr.isString;
-var isFunction = fighterr.isFunction
-var isArray = fighterr.isArray;
-
-function reduce(getter, reducer, ctx) {
-  var reducerIsFunction = isFunction(reducer);
-  var reducerIsArray = isArray(reducer);
-
-  if (!reducerIsFunction && !reducerIsArray) {
-    throw new Error('reduce: reducer needs to be a function or array!');
-  }
-
-  if (reducerIsArray && !isFunction(reducer[reducer.length - 1])) {
-    throw new Error('reduce: when reducer is defined as array, last member needs to be reduce function');
-  }
-
-  if (reducerIsFunction) {
-    return [
-      getter,
-      reducer.bind(ctx),
-    ];
-  }
-
-  // otherwise reducer is defined through array
-  reducer[reducer.length - 1] = reducer[reducer.length - 1].bind(ctx);
-
-  if (isString(getter[0])) {
-    return [[getter]].concat(reducer);
-  }
-
-  return [getter].concat(reducer);
+function isFunction(obj) {
+  return typeof obj == 'function' || false;
 }
 
-function transform(getterList) {
-  var ctx = {};
-  var wrapped = getterList.shift();
-  var next = getterList.shift();
+function isArray(obj) {
+  return Array.isArray(obj);
+}
 
-  while (next) {
-    wrapped = reduce(wrapped, next, ctx);
-    next = getterList.shift();
+function transform(list) {
+  var ctx = {};
+  var wrapped = [];
+  var isFirstElementArray = isArray(list[0]);
+  var isLastElementFunc = isFunction(list[list.length - 1]);
+
+  if (list.length < 2) {
+    throw new Error('transform: list should contain at least a getter and reducer function!');
+  }
+
+  if (!isFirstElementArray) {
+    throw new Error('transform: first item needs to be KeyPath or Getter!');
+  }
+
+  if (!isLastElementFunc) {
+    throw new Error('transform: last item needs to be a function!');
+  }
+
+  for (var i = 0; i < list.length; i++) {
+    var next = list[i];
+    var isLast = (i === list.length - 1);
+    var nextIsFunction = isFunction(next);
+    var nextIsArray = isArray(next);
+
+    if (!nextIsFunction && !nextIsArray) {
+      throw new Error('transform: transform items must be functions or KeyPath/Getter!');
+    }
+
+    if (nextIsFunction) {
+      wrapped.push(next.bind(ctx));
+      // wrap as Getter only if it's not the last element in the transform list
+      wrapped = isLast ? wrapped : [wrapped];
+    } else {
+      wrapped.push(next);
+    }
   }
 
   return wrapped;
 }
 
-module.exports = {
-  transform: transform,
-  reduce: reduce,
-};
+module.exports = transform;
