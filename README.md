@@ -15,41 +15,44 @@ nuclear-transform composes Getters for you and allows you to transform the data 
 import { transform } from 'nuclear-transform';
 import reactor from './reactor';
 
-const adminNamesGetter = transform([
-  // get current org
-  [
-    ['currentlySelectedOrganization'],
-    ['organizations'],
-    (id, orgs) => {
-      return orgs[id];
-    }
-  ],
-
-  // get websites
-  ['websites'],
-
-  // filter websites by organization id
-  (org, websites) => websites.filter(web => web.organizationId === org.id),
-
-  // fetch users
+var organizationGetter = ['organizations', '3']; // get specific org
+var websitesGetter = ['websites'];
+var adminUsersGetter = [
   ['users'],
-
-  // filter admin users for given websites
-  (websites, users) => {
-    const list = [];
-    websites.forEach(website => {
-      users.forEach(user => {
-        if (user.websiteId === website.id && user.admin === true) list.push(user);
-      });
+  function getAdmins(users) {
+    return users.filter(function (user) {
+      return user.get('permission') === 'admin';
     });
   },
+];
 
-  // map users to just names
-  users => users.map(u => u.name)
-]);
+var list = [
+  organizationGetter,
+  websitesGetter,
+  (org, websites) => {
+    return websites.filter(w => w.get('orgId') === org.get('id'));
+  },
+  adminUsersGetter,
+  (websites, users) => {
+    return users.filter(u => websites.findIndex(w => w.get('id') === u.get('wId')) !== -1);
+  },
+  users => {
+    return users.map(u => u.get('name') );
+  },
+];
+
+const adminNamesGetter = transform(list);
 
 // log admin names list
-console.log(reactor.evaluate(adminNamesGeter));
+console.log(reactor.evaluateToJS(adminNamesGetter));
+
+// additional transforming using composed getter
+console.log(reactor.evaluateToJS(
+  [
+    adminNamesGetter,
+    names => name.count(),
+  ]
+));
 
 ```
 
