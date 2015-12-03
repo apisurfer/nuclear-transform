@@ -1,7 +1,7 @@
 nuclear-transform
 =================
 
-![Dependencies status](https://david-dm.org/popc0rn/bind-function-tree.svg) ![Build status](https://travis-ci.org/popc0rn/pirates-log.svg?branch=master)
+![Dependencies status](https://david-dm.org/popc0rn/nuclear-transform.svg) ![Build status](https://travis-ci.org/popc0rn/pirates-log.svg?branch=master)
 
 Library for "on the go" [Nuclearjs Getter](https://optimizely.github.io/nuclear-js/docs/04-getters.html) transformations.
 
