@@ -1,6 +1,6 @@
 {
   "name": "nuclear-transform",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tiny library for \"on the go\" nuclearjs getter transformation/reduce",
   "main": "index.js",
   "scripts": {
